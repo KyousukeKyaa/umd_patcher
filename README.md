@@ -46,3 +46,7 @@ Other than that, all is left is to find the necessary license file of the respec
 **Patcher** - The patcher is a CLI program, there's no GUI for now, it doesn't really need one but I plan to make something like an old-school loader in the future, midi song included.
 
 **For Translators** - I'm working on a separate program to make it easier for translators to generate xdelta patches that will be used with UMD Patcher in the future. I plan to merge this other program together with UMD Patcher when everything is ready.
+
+**Beta Testing** - The program needs torough testing on different versions of windows, I've tested on Windows 7 64-bit and can confirm it works at least on this.
+
+**GNU/Linux Ports** - Most of the dependencies already have versions that run on GNU/Linux, tools like UMDGen can be used with Wine too. Mostly only the batch file needs to be ported. At this moment I've no GNU/Linux installations, any contribution would help a lot.
