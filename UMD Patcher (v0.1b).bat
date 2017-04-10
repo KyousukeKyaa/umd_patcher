@@ -336,6 +336,15 @@ echo 039 >> debug.log 2>&1
 del /f /q INSTALL.DAT >> debug.log 2>&1
 echo 039.1 (cleanup) >> debug.log 2>&1
 
+IF EXIST "cpkmakec.exe" (
+    GOTO CPKM
+) ELSE (
+    @ECHO cpkmakec.exe or cpkmaker.dll are missing.
+    pause
+    GOTO EXIT
+)
+
+:CPKM
 cpkmakec.exe "temp\install-en" INSTALL.cpk -mode=FULL -code=UTF-8 -view >> debug.log 2>&1
 echo 040 >> debug.log 2>&1
 
