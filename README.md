@@ -67,4 +67,8 @@ Other than that, all is left is to find the necessary license file of the respec
 
 *cpkmakec.exe* [(v1.36.00)](https://duckduckgo.com/html/?q=cpkmakec.exe%201.36.00) - MD5: b06a7eb5fee15170da156c162bc805ae
 
+*UMDGen.exe* [(v4.00)](http://www.romhacking.net/utilities/1218/) - MD5: 6d86553f6bd7cf0940695bd2891baad1
+
+*.xdelta patch file* (you can [make it](https://gbatemp.net/threads/sword-art-online-infinity-moment-psp.342727/page-86#post-7232590) on your own if you're a translator, or use the test patch already included at the download link in the beginning of this article).
+
 **Note** - Some of the programs listed above have newer versions but I haven't tested them. These versions are confirmed working.
