@@ -35,15 +35,17 @@ echo /**************************************************************************
 del /f /q temp.hex >> debug.log 2>&1
 echo GPL-A >> debug.log 2>&1
 
-echo 0000	5b 7b 30 30 30 32 31 34  41 30 2d 30 30 30 30 2d   [{000214A0-0000- > temp.hex
-echo 0010	30 30 30 30 2d 43 30 30  30 2d 30 30 30 30 30 30   0000-C000-000000 >> temp.hex
-echo 0020	30 30 30 30 34 36 7d 5d  0d 0a 50 72 6f 70 33 3d   000046}]..Prop3= >> temp.hex
-echo 0030	31 39 2c 31 31 0d 0a 5b  49 6e 74 65 72 6e 65 74   19,11..[Internet >> temp.hex
-echo 0040	53 68 6f 72 74 63 75 74  5d 0d 0a 55 52 4c 3d 68   Shortcut]..URL=h >> temp.hex
-echo 0050	74 74 70 73 3a 2f 2f 77  77 77 2e 67 6e 75 2e 6f   ttps://www.gnu.o >> temp.hex
-echo 0060	72 67 2f 6c 69 63 65 6e  73 65 73 2f 71 75 69 63   rg/licenses/quic >> temp.hex
-echo 0070	6b 2d 67 75 69 64 65 2d  67 70 6c 76 33 2e 65 6e   k-guide-gplv3.en >> temp.hex
-echo 0080	2e 68 74 6d 6c 0d 0a 49  44 4c 69 73 74 3d 0d 0a   .html..IDList=.. >> temp.hex
+rem *** *** *** URL File *** *** ***
+echo 0000	5b 7b 30 30 30 32 31 34  41 30 2d 30 30 30 30 2d > temp.hex
+echo 0010	30 30 30 30 2d 43 30 30  30 2d 30 30 30 30 30 30 >> temp.hex
+echo 0020	30 30 30 30 34 36 7d 5d  0d 0a 50 72 6f 70 33 3d >> temp.hex
+echo 0030	31 39 2c 31 31 0d 0a 5b  49 6e 74 65 72 6e 65 74 >> temp.hex
+echo 0040	53 68 6f 72 74 63 75 74  5d 0d 0a 55 52 4c 3d 68 >> temp.hex
+echo 0050	74 74 70 73 3a 2f 2f 77  77 77 2e 67 6e 75 2e 6f >> temp.hex
+echo 0060	72 67 2f 6c 69 63 65 6e  73 65 73 2f 71 75 69 63 >> temp.hex
+echo 0070	6b 2d 67 75 69 64 65 2d  67 70 6c 76 33 2e 65 6e >> temp.hex
+echo 0080	2e 68 74 6d 6c 0d 0a 49  44 4c 69 73 74 3d 0d 0a >> temp.hex
+rem *** *** *** URL File *** *** ***
 
 del /f /q GPLv3.url >> debug.log 2>&1
 echo GPL-B >> debug.log 2>&1
@@ -53,9 +55,6 @@ echo GPL-C >> debug.log 2>&1
 
 del /f /q temp.hex >> debug.log 2>&1
 echo GPL-D >> debug.log 2>&1
-
-rem SetLocal EnableExtensions
-rem SetLocal EnableDelayedExpansion
 
 Choice /N /C DLS /T 2 /D S /M "" >> debug.log 2>&1
 If Errorlevel 3 Goto SKIP
@@ -77,7 +76,8 @@ IF EXIST "SAO.iso" (
     GOTO VERIFY
 ) ELSE (
     @ECHO SAO.iso Not Found.
-    @ECHO You need to rename your file to "SAO.iso" first.
+    @ECHO You need to rename your file to "SAO.iso" first. 
+    @ECHO Make sure "SAO.iso" is located within this folder.
     GOTO EXIT
 )
 
@@ -211,6 +211,32 @@ echo 014.1 (cleanup) >> debug.log 2>&1
 mkdir "%imhere%temp\install-jp" >> debug.log 2>&1
 echo 015 >> debug.log 2>&1
 
+del /f /q dump2.hex >> debug.log 2>&1
+echo 015.1 (cleanup) >> debug.log 2>&1
+
+rem *** *** *** quickbms.bat File *** *** ***
+echo 0000	40 65 63 68 6f 20 6f 66  66 0d 0a 73 65 74 20 69 > dump2.hex
+echo 0010	6d 68 65 72 65 3d 25 7e  64 70 30 0d 0a 0d 0a 65 >> dump2.hex
+echo 0020	63 68 6f 20 50 72 6f 63  65 73 73 69 6e 67 20 43 >> dump2.hex
+echo 0030	50 4b 20 61 72 63 68 69  76 65 2e 2e 2e 0d 0a 0d >> dump2.hex
+echo 0040	0a 71 75 69 63 6b 62 6d  73 2e 65 78 65 20 2d 6f >> dump2.hex
+echo 0050	20 71 75 69 63 6b 62 6d  73 2e 62 6d 73 20 69 6e >> dump2.hex
+echo 0060	73 74 61 6c 6c 2d 6a 70  2e 64 61 74 20 22 25 69 >> dump2.hex
+echo 0070	6d 68 65 72 65 25 74 65  6d 70 5c 69 6e 73 74 61 >> dump2.hex
+echo 0080	6c 6c 2d 6a 70 22 20 3e  3e 20 64 65 62 75 67 2e >> dump2.hex
+echo 0090	6c 6f 67 20 32 3e 26 31  0d 0a 65 63 68 6f 20 30 >> dump2.hex
+echo 00a0	31 36 20 3e 3e 20 64 65  62 75 67 2e 6c 6f 67 20 >> dump2.hex
+echo 00b0	32 3e 26 31 0d 0a 0d 0a  65 63 68 6f 20 44 6f 6e >> dump2.hex
+echo 00c0	65 2e 0d 0a 74 69 6d 65  6f 75 74 20 2f 74 20 33 >> dump2.hex
+echo 00d0	20 2f 6e 6f 62 72 65 61  6b 20 3e 6e 75 6c >> dump2.hex
+rem *** *** *** quickbms.bat File *** *** ***
+
+del /f /q quickbms.bat >> debug.log 2>&1
+echo 015.2 (cleanup) >> debug.log 2>&1
+
+certutil.exe -v -decodehex dump2.hex quickbms.bat >> debug.log 2>&1
+echo 015.5 >> debug.log 2>&1
+
 start /wait cmd /c quickbms.bat
 rem ***016 from quickbms.bat***
 echo 017 >> debug.log 2>&1
@@ -218,8 +244,11 @@ echo 017 >> debug.log 2>&1
 du -q -v "%imhere%temp\install-jp" >> debug.log 2>&1
 echo 018 >> debug.log 2>&1
 
-del /f /q install-jp.dat >> debug.log 2>&1
+del /f /q quickbms.bat install-jp.dat >> debug.log 2>&1
 echo 019 >> debug.log 2>&1
+
+del /f /q dump2.hex >> debug.log 2>&1
+echo 019.0 >> debug.log 2>&1
 
 echo /*** PASSAGE 3 END ***/ >> debug.log 2>&1
 echo 020 >> debug.log 2>&1
@@ -324,7 +353,7 @@ echo Passage 8/9...
 echo /*** PASSAGE 8 START ***/ >> debug.log 2>&1
 echo 044 >> debug.log 2>&1
 
-echo. && echo Your SAO.iso (Japanese) will be patched in a moment.
+echo. & echo Your SAO.iso (Japanese) will be patched in a moment.
 echo If you haven't already made a backup, do you want to make a backup copy now?
 
 for /f "tokens=2 delims==" %%a in ('wmic OS Get localdatetime /value') do set "dt=%%a"
