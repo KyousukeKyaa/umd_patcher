@@ -7,7 +7,7 @@ This program is released under GPLv3 license, check the [LICENSE](https://github
 UMD Patcher (v0.1b) is a CLI-based program made to patch ISO-formatted UMD rips.
 The idea started when I tried to create a patch for SAO Infinity Moment to convert the game files to the fan-translated version *(by exorcizamus)* and around the same time I found an active [translation project](https://gbatemp.net/threads/sword-art-online-infinity-moment-psp.342727/) so I decited to contribute. The CLI program is hardcoded with all values needed to patch this game, you only need the dependencies, which I've uploaded here for now:
 
-### -> **[Download](https://www.sendspace.com/file/w9mypv)**
+### -> **[Download](https://www.sendspace.com/file/lrlfkq)**
 
 What it does:
 - [x] extract "INSTALL.DAT" from "SAO.iso" with "7-zip.exe"
@@ -40,6 +40,11 @@ Drag and drop INSTALL.DAT here (click Yes when asked to replace), then open the 
 Select the destination folder and click Save, then wait for UMDGen to finish the process.
 Congrats, you now have an English (BETA) version of SAO Infinity Moment.
 It works in emulator but probably not on PSP (EBOOT.BIN needs a fix). Stay tuned because there will be updates later.
+Remember to remove the old INSTALL.DAT from PPSSPP memstick directory before starting the game:
+```
+...\ppsspp\memstick\PSP\SAVEDATA\NPJH50701INSTALL\INSTALL.DAT
+```
+You have to install it again from SAO Infinity Moment's main menu.
 
 # **TODO**
 **Tools** - This repository has no 3rd party tools attached but it still requires dependencies to run, some are open source and free and others are freeware, these need to be replaced with a working alternative, for example UMDGen.exe is a discontinued project, but I haven't found any alternatives. If you know any tool that could be used, you can open an issue or contact me on the gbatemp forum here: [my account](https://gbatemp.net/members/nasiin.419446/).
