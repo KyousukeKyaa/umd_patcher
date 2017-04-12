@@ -5,9 +5,9 @@ This program is released under GPLv3 license, check the [LICENSE](https://github
 ![screenshot.png](https://i.imgur.com/uXz1YRK.png)
 
 UMD Patcher (v0.1b) is a CLI-based program made to patch ISO-formatted UMD rips.
-The idea started when I tried to create a patch for SAO Infinity Moment to convert the game files to the fan-translated version *(by exorcizamus)* and around the same time I found an active [translation project](https://gbatemp.net/threads/sword-art-online-infinity-moment-psp.342727/) so I decited to contribute. The CLI program is hardcoded with all values needed to patch this game, you only need the dependencies, which I've uploaded here for now:
+The idea started when I tried to create a patch for SAO Infinity Moment to convert the game files to the fan-translated version *(by exorcizamus)* and around the same time I found an active [translation project](https://gbatemp.net/threads/sword-art-online-infinity-moment-psp.342727/) so I decided to contribute. The CLI program is hardcoded with all values needed to patch this game, you only need the dependencies, which I've uploaded here for now:
 
-### -> **[Download](https://www.sendspace.com/file/lrlfkq)**
+### -> **[Download](https://www.sendspace.com/file/whlrnz)**
 
 What it does:
 - [x] extract "INSTALL.DAT" from "SAO.iso" with "7-zip.exe"
@@ -40,11 +40,19 @@ Drag and drop INSTALL.DAT here (click Yes when asked to replace), then open the 
 Select the destination folder and click Save, then wait for UMDGen to finish the process.
 Congrats, you now have an English (BETA) version of SAO Infinity Moment.
 It works in emulator but probably not on PSP (EBOOT.BIN needs a fix). Stay tuned because there will be updates later.
-Remember to remove the old INSTALL.DAT from PPSSPP memstick directory before starting the game:
-```
-...\ppsspp\memstick\PSP\SAVEDATA\NPJH50701INSTALL\INSTALL.DAT
-```
-You have to install it again from SAO Infinity Moment's main menu.
+
+**Notes for PPSSPP users**
+Before using the new patched ISO, there are a few things you should do to in order to be able to continue playing from where you left in the Japanese version without losing any progress.
+- First, run the Japanese version as usual and load your most recent save state;
+- Walk Kirito to a save point (changing areas = auto save, e.g. just enter the town);
+- Don't move and quit PPSSPP (any progress you do from here will be lost);
+- Delete the old INSTALL.DAT from "...\ppsspp\memstick\PSP\SAVEDATA\NPJH50701INSTALL\INSTALL.DAT"
+- Make a backup of "...\ppsspp\memstick\PSP" just in case you messed something up and need to restore your save states later;
+- Now run the patched (English) ISO that you just made and select "DATA INSTALL" in SAO main menu (it will freeze for a minute or two, the time needed to extract INSTALL.DAT from the ISO to the PPSSPP memstick)
+- Go to the main menu again and click "CONTINUE"
+- Enjoy.
+
+I recommend to not use your old save states, because they can crash the game (it happened to me). The save states will still be in Japanese, at least all the game content of the areas you have explored will still be in Japanese because that's how PPSSPP cached them. Your future save states will obviously be all in English (as far as the patch goes with the translation), if you resumed playing as I explained above. 
 
 # **TODO**
 **Tools** - This repository has no 3rd party tools attached but it still requires dependencies to run, some are open source and free and others are freeware, these need to be replaced with a working alternative, for example UMDGen.exe is a discontinued project, but I haven't found any alternatives. If you know any tool that could be used, you can open an issue or contact me on the gbatemp forum here: [my account](https://gbatemp.net/members/nasiin.419446/).
