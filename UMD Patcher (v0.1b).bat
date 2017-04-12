@@ -107,6 +107,26 @@ IF %FileSize1% NEQ %FileSize2% (
     @ECHO Proceeding with patching...
 )
 
+IF EXIST "cpkmakec.exe" (
+    GOTO DLLCH
+) ELSE (
+    @ECHO ERROR - A dependency is missing: cpkmakec.exe
+    @ECHO Check the dependencies list in the documentation of the repository.
+    pause
+    GOTO EXIT
+)
+
+:DLLCH
+IF EXIST "cpkmaker.dll" (
+    GOTO CLEAR
+) ELSE (
+    @ECHO ERROR - A dependency is missing: cpkmaker.dll
+    @ECHO Check the dependencies list in the documentation of the repository.
+    pause
+    GOTO EXIT
+)
+
+:CLEAR
 timeout /t 3 /nobreak >nul
 cls
 
@@ -140,6 +160,7 @@ echo.
 echo Patching started. (NOTE: it will take SOME time)
 echo Passage 1/9...
 
+set imhere=%~dp0
 echo /*** PASSAGE 1 START ***/ >> debug.log 2>&1
 echo 001 >> debug.log 2>&1
 
@@ -155,7 +176,6 @@ echo 002 >> debug.log 2>&1
 del /f /q INSTALL.DAT >> debug.log 2>&1
 echo 002.1 (cleanup) >> debug.log 2>&1
 
-set imhere=%~dp0
 move /y "%imhere%temp\PSP_GAME\INSDIR\INSTALL.DAT" "%imhere%INSTALL.DAT" >> debug.log 2>&1
 echo 003 >> debug.log 2>&1
 
@@ -336,15 +356,6 @@ echo 039 >> debug.log 2>&1
 del /f /q INSTALL.DAT >> debug.log 2>&1
 echo 039.1 (cleanup) >> debug.log 2>&1
 
-IF EXIST "cpkmakec.exe" (
-    GOTO CPKM
-) ELSE (
-    @ECHO cpkmakec.exe or cpkmaker.dll are missing.
-    pause
-    GOTO EXIT
-)
-
-:CPKM
 cpkmakec.exe "temp\install-en" INSTALL.cpk -mode=FULL -code=UTF-8 -view >> debug.log 2>&1
 echo 040 >> debug.log 2>&1
 
