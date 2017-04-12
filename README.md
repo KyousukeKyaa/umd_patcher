@@ -41,7 +41,7 @@ Select the destination folder and click Save, then wait for UMDGen to finish the
 Congrats, you now have an English (BETA) version of SAO Infinity Moment.
 It works in emulator but probably not on PSP (EBOOT.BIN needs a fix). Stay tuned because there will be updates later.
 
-**Notes for PPSSPP users**
+**Notes for PPSSPP users:**
 Before using the new patched ISO, there are a few things you should do to in order to be able to continue playing from where you left in the Japanese version without losing any progress.
 - First, run the Japanese version as usual and load your most recent save state;
 - Walk Kirito to a save point (changing areas = auto save, e.g. just enter the town);
