@@ -1,13 +1,13 @@
-# UMD Patcher (v0.1b)
+# UMD Patcher (v0.2b)
 
 This program is released under GPLv3 license, check the [LICENSE](https://github.com/KyousukeKyaa/umd_patcher/blob/master/LICENSE) file for details.
 
-![screenshot.png](https://i.imgur.com/uXz1YRK.png)
+![screenshot.png](https://i.imgur.com/2EUwnDf.png)
 
-UMD Patcher (v0.1b) is a CLI-based program made to patch ISO-formatted UMD rips.
+UMD Patcher (v0.2b) is a CLI-based program made to patch ISO-formatted UMD rips.
 The idea started when I tried to create a patch for SAO Infinity Moment to convert the game files to the fan-translated version *(by exorcizamus)* and around the same time I found an active [translation project](https://gbatemp.net/threads/sword-art-online-infinity-moment-psp.342727/) so I decided to contribute. The CLI program is hardcoded with all values needed to patch this game, you only need the dependencies, which I've uploaded here for now:
 
-### -> **[Download](https://www.sendspace.com/file/whlrnz)**
+### -> **[Download](https://www.sendspace.com/file/iia4z7)**
 
 What it does:
 - [x] extract "INSTALL.DAT" from "SAO.iso" with "7-zip.exe"
@@ -20,26 +20,38 @@ What it does:
 - [x] extract "install-en.tar" archive with "7-zip.exe" to "install-en" folder
 - [x] pack "install-en" folder to "INSTALL.cpk" using "cpkmakec.exe"
 - [x] rename "INSTALL.cpk" to "INSTALL.DAT"
+- [x] extract "EBOOT.BIN" from "SAO.iso" with "7-zip.exe"
+- [x] decrypt "EBOOT.BIN" and create "EBOOT.BIN.dec" with "deceboot.exe"
+- [x] patch "EBOOT.BIN.dec" to psp-compatible "EBOOT.BIN" using "xdelta.exe"
 - [x] make backup of "SAO.iso" to "Backup" folder
-- [ ] copy "INSTALL.DAT" in "SAO.iso" using "UMDGen.exe" or any working alternative
-- [ ] finalize "SAO.iso" for usage on PSP
+- [x] autoreplace "INSTALL.DAT" and "EBOOT.BIN" in "SAO.iso" using "WQSG_UMD.exe" or give the choice replace the files manually with "UMDGen.exe" (recommended)
 
-As momentary solution for last steps:
-First run the patch, then when everything is completed open your Japanese ISO in UMDGen.exe and go to:
+How to manually replace the files with UMDGen:
+First run the patch and select Manual, then when everything is completed open your Japanese ISO in UMDGen.exe and go to:
 ```
 --->PSP_GAME
 ------>INSDIR
 ```
 
-Drag and drop INSTALL.DAT here (click Yes when asked to replace), then open the File menu (top-left in UMDGen):
+Drag and drop INSTALL.DAT here (click Yes when asked to replace). Then, always in UMDGen.exe go to:
+```
+--->PSP_GAME
+------>SYSDIR
+```
+
+Drag and drop EBOOT.BIN here (click Yes again when asked to replace). After that, open the File menu (top-left in UMDGen):
 ```
 --->File
 ------>Save As
 --------->Uncompressed (*iso)
 ```
-Select the destination folder and click Save, then wait for UMDGen to finish the process.
-Congrats, you now have an English (BETA) version of SAO Infinity Moment.
-It works in emulator but probably not on PSP (EBOOT.BIN needs a fix). Stay tuned because there will be updates later.
+
+Select the destination folder and click Save, wait for UMDGen to finish the process. That's all, the ISO is ready to be used.
+
+**Q**: Why is the manual replacement recommended?
+**A**: because the autoreplace with "WQSG_UMD.exe" causes the ISO to expand in size, thus the final result is a 2GB and more ISO file. If you don't care about occupied space, then you can use the autoreplace if you want.
+
+Either ways, congrats! You now have an English (BETA) version of SAO Infinity Moment. Stay tuned because there will be updates later.
 
 **Notes for PPSSPP users:**
 Before using the new patched ISO, there are a few things you should do to in order to be able to continue playing from where you left in the Japanese version without losing any progress.
@@ -52,10 +64,10 @@ Before using the new patched ISO, there are a few things you should do to in ord
 - Go to the main menu again and click "CONTINUE"
 - Enjoy.
 
-I recommend to not use your old save states, because they can crash the game (it happened to me). The save states will still be in Japanese, at least all the game content of the areas you have explored will still be in Japanese because that's how PPSSPP cached them. Your future save states will obviously be all in English (as far as the patch goes with the translation), if you resumed playing as I explained above. 
+I recommend to not use your old save states, because they can crash the game (it happened to me). The pre-patch save states will still be in Japanese, at least all the game content of the areas you have explored will still be in Japanese because that's how PPSSPP cached them. Your future save states will obviously be all in English (as far as the patch goes with the translation), if you resumed playing as I explained above and if you didn't load from pre-patch save state.
 
 # **TODO**
-**Tools** - This repository has no 3rd party tools attached but it still requires dependencies to run, some are open source and free and others are freeware, these need to be replaced with a working alternative, for example UMDGen.exe is a discontinued project, but I haven't found any alternatives. If you know any tool that could be used, you can open an issue or contact me on the gbatemp forum here: [my account](https://gbatemp.net/members/nasiin.419446/).
+**Tools** - This repository has no 3rd party tools attached but it still requires dependencies to run, some are open source and free and others are freeware, these need to be replaced with a working alternative, for example UMDGen.exe is a discontinued project, but I haven't found any alternatives. If you know any tool that could be used, you can open an [issue](https://github.com/KyousukeKyaa/umd_patcher/issues) or contact me on the gbatemp forum here: [my account](https://gbatemp.net/members/nasiin.419446/).
 Other than that, all is left is to find the necessary license file of the respective tools and add them to future archives.
 
 **Patcher** - The patcher is a CLI program, there's no GUI for now, it doesn't really need one but I plan to make something like an old-school loader in the future, midi song included.
