@@ -96,6 +96,10 @@ Other than that, all is left is to find the necessary license file of the respec
 
 *UMDGen.exe* [(v4.00)](http://www.romhacking.net/utilities/1218/) - MD5: 6d86553f6bd7cf0940695bd2891baad1
 
+*deceboot.exe* [(v0.3)](http://www.romhacking.net/utilities/1225/) - MD5: f65c95bf646562df7225bf344ebaabe2
+
+*WQSG_UMD.exe* [(r53)](https://github.com/KyousukeKyaa/WQSG_UMD_kkMod/tree/master/Debug) - MD5: 8eab066b3e29129ddaea1aa41955aca4
+
 *.xdelta patch file* (you can [make it](https://gbatemp.net/threads/sword-art-online-infinity-moment-psp.342727/page-86#post-7232590) on your own if you're a translator, or use the test patch already included at the download link in the beginning of this article).
 
-**Note** - Some of the programs listed above have newer versions but I haven't tested them. These versions are confirmed working.
+**Note** - Some of the programs listed above have newer versions but I haven't tested them. These versions are confirmed working (except WQSG_UMD.exe which is buggy and doesn't run well on Win10).
