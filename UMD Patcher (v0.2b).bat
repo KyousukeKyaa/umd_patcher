@@ -2,7 +2,7 @@
 echo /*****************************************************************************************/ > debug.log 2>&1
 echo /*****************************************************************************************/ >> debug.log 2>&1
 echo /***                                                                                   ***/ >> debug.log 2>&1
-echo /***  UMD Patcher (v0.1b) is a CLI-based program for patching ISO-formatted UMD rips.  ***/ >> debug.log 2>&1
+echo /***  UMD Patcher (v0.2b) is a CLI-based program for patching ISO-formatted UMD rips.  ***/ >> debug.log 2>&1
 echo /***  Copyright (C) 2017 Michael Colombo.                                              ***/ >> debug.log 2>&1
 echo /***                                                                                   ***/ >> debug.log 2>&1
 echo /***  This program is free software: you can redistribute it and/or modify             ***/ >> debug.log 2>&1
@@ -24,7 +24,7 @@ echo. >> debug.log 2>&1
 
 echo /****************************************************************************/
 echo.
-echo UMD Patcher (v0.1b) Copyright (C) 2017 Michael Colombo
+echo UMD Patcher (v0.2b) Copyright (C) 2017 Michael Colombo
 echo.
 echo This program comes with ABSOLUTELY NO WARRANTY; for details press 'D' key.
 echo This is free software, and you are welcome to redistribute it
@@ -93,7 +93,7 @@ IF %FileSize1% NEQ %FileSize2% (
     @ECHO 000 >> debug.log 2>&1
     @ECHO /*** ERROR END ***/ >> debug.log 2>&1
     @ECHO SAO.iso file size is %FileSize2% bytes, not %FileSize1% bytes.
-    @ECHO Your file might be encrypted, damaged or from a different release.
+    @ECHO Your file might be encrypted, damaged or from a previously failed patch attempt.
     @ECHO In order to use this patch, you need the intended decrypted UMD rip.
     @ECHO If you believe this is a mistake, contact the patch maintainers on the website.
     @ECHO A debug.log file has been generated. This patch will be stopped now.
@@ -102,7 +102,7 @@ IF %FileSize1% NEQ %FileSize2% (
     @ECHO SAO.iso Found!
     @ECHO Close all other programs before continuing.
     @ECHO This is a BETA patch. Make a backup copy of your SAO.iso to use for future updates.
-    @ECHO NOTE: you need at least 3GB free disk space to use this patch - for temporary files.
+    @ECHO NOTE: you need at least 4GB free disk space to use this patch - for temporary files.
     PAUSE
     @ECHO Proceeding with patching...
 )
@@ -157,6 +157,11 @@ echo............................................................................
 echo........................................................................................................................................................................................................
 echo.
 
+for /f "tokens=2 delims==" %%a in ('wmic OS Get localdatetime /value') do set "dt=%%a"
+set "YY=%dt:~2,2%" & set "YYYY=%dt:~0,4%" & set "MM=%dt:~4,2%" & set "DD=%dt:~6,2%"
+set "HH=%dt:~8,2%" & set "Min=%dt:~10,2%" & set "Sec=%dt:~12,2%"
+set "datestamp=%YYYY%%MM%%DD%" & set "timestamp=%HH%%Min%%Sec%"
+
 echo Patching started. (NOTE: it will take SOME time)
 echo Passage 1/9...
 
@@ -176,6 +181,16 @@ echo 002 >> debug.log 2>&1
 del /f /q INSTALL.DAT >> debug.log 2>&1
 echo 002.1 (cleanup) >> debug.log 2>&1
 
+IF EXIST "temp\PSP_GAME\INSDIR\INSTALL.DAT" (
+    GOTO FILE01
+) ELSE (
+    @ECHO INSTALL.DAT Not Found.
+    @ECHO Something went wrong, try restarting the patch.
+    @ECHO If the problem repeates, send debug-%datestamp%-%timestamp%.7z to the patch creators.
+    GOTO EXITL
+)
+
+:FILE01
 move /y "%imhere%temp\PSP_GAME\INSDIR\INSTALL.DAT" "%imhere%INSTALL.DAT" >> debug.log 2>&1
 echo 003 >> debug.log 2>&1
 
@@ -261,6 +276,16 @@ start /wait cmd /c quickbms.bat
 rem ***016 from quickbms.bat***
 echo 017 >> debug.log 2>&1
 
+IF EXIST "temp\install-jp" (
+    GOTO FILE02
+) ELSE (
+    @ECHO install-jp Not Found.
+    @ECHO Something went wrong, try restarting the patch.
+    @ECHO If the problem repeates, send debug-%datestamp%-%timestamp%.7z to the patch creators.
+    GOTO EXITL
+)
+
+:FILE02
 du -q -v "%imhere%temp\install-jp" >> debug.log 2>&1
 echo 018 >> debug.log 2>&1
 
@@ -284,6 +309,16 @@ echo 021.1 (cleanup) >> debug.log 2>&1
 move "%imhere%temp\install-jp" "%imhere%install-jp" >> debug.log 2>&1
 echo 022 >> debug.log 2>&1
 
+IF EXIST "install-jp" (
+    GOTO FILE03
+) ELSE (
+    @ECHO install-jp Not Found.
+    @ECHO Something went wrong, try restarting the patch.
+    @ECHO If the problem repeates, send debug-%datestamp%-%timestamp%.7z to the patch creators.
+    GOTO EXITL
+)
+
+:FILE03
 du.exe -nobanner -q -v install-jp >> debug.log 2>&1
 echo 022.0 >> debug.log 2>&1
 
@@ -313,7 +348,17 @@ echo 028 >> debug.log 2>&1
 del /f /q install-en.tar >> debug.log 2>&1
 echo 028.1 (cleanup) >> debug.log 2>&1
 
-xdelta.exe -d -vfs "install-jp.tar" "xdelta-patch.xdelta" "install-en.tar" >> debug.log 2>&1
+IF EXIST "install-jp.tar" (
+    GOTO FILE04
+) ELSE (
+    @ECHO install-jp.tar Not Found.
+    @ECHO Something went wrong, try restarting the patch.
+    @ECHO If the problem repeates, send debug-%datestamp%-%timestamp%.7z to the patch creators.
+    GOTO EXITL
+)
+
+:FILE04
+xdelta.exe -d -vfs "install-jp.tar" "xdelta-i.xdelta" "install-en.tar" >> debug.log 2>&1
 echo 029 >> debug.log 2>&1
 
 CertUtil -hashfile "install-en.tar" MD5 >> debug.log 2>&1
@@ -336,6 +381,16 @@ echo 034 >> debug.log 2>&1
 rd /s /q "%imhere%temp\install-en" >> debug.log 2>&1
 echo 034.1 (cleanup) >> debug.log 2>&1
 
+IF EXIST "install-en.tar" (
+    GOTO FILE05
+) ELSE (
+    @ECHO install-en.tar Not Found.
+    @ECHO Something went wrong, try restarting the patch.
+    @ECHO If the problem repeates, send debug-%datestamp%-%timestamp%.7z to the patch creators.
+    GOTO EXITL
+)
+
+:FILE05
 7-zip.exe x install-en.tar -otemp >> debug.log 2>&1
 echo 035 >> debug.log 2>&1
 
@@ -356,9 +411,29 @@ echo 039 >> debug.log 2>&1
 del /f /q INSTALL.DAT >> debug.log 2>&1
 echo 039.1 (cleanup) >> debug.log 2>&1
 
+IF EXIST "temp\install-en" (
+    GOTO FILE06
+) ELSE (
+    @ECHO install-en Not Found.
+    @ECHO Something went wrong, try restarting the patch.
+    @ECHO If the problem repeates, send debug-%datestamp%-%timestamp%.7z to the patch creators.
+    GOTO EXITL
+)
+
+:FILE06
 cpkmakec.exe "temp\install-en" INSTALL.cpk -mode=FULL -code=UTF-8 -view >> debug.log 2>&1
 echo 040 >> debug.log 2>&1
 
+IF EXIST "INSTALL.cpk" (
+    GOTO FILE07
+) ELSE (
+    @ECHO INSTALL.cpk Not Found.
+    @ECHO Something went wrong, try restarting the patch.
+    @ECHO If the problem repeates, send debug-%datestamp%-%timestamp%.7z to the patch creators.
+    GOTO EXITL
+)
+
+:FILE07
 ren INSTALL.cpk INSTALL.DAT >> debug.log 2>&1
 echo 041 >> debug.log 2>&1
 
@@ -368,22 +443,94 @@ echo 042 >> debug.log 2>&1
 rd /s /q "%imhere%temp\install-en" >> debug.log 2>&1
 echo 043 >> debug.log 2>&1
 
+echo /*** PASSAGE 7 END ***/ >> debug.log 2>&1
+echo 044 >> debug.log 2>&1
+
 echo Passage 8/9...
 
 echo /*** PASSAGE 8 START ***/ >> debug.log 2>&1
-echo 044 >> debug.log 2>&1
 
-echo. & echo Your SAO.iso (Japanese) will be patched in a moment.
+7-zip.exe x SAO.iso PSP_GAME/SYSDIR/EBOOT.BIN -otemp >> debug.log 2>&1
+echo 045 >> debug.log 2>&1
+
+del /f /q EBOOT.BIN >> debug.log 2>&1
+echo 045.1 (cleanup) >> debug.log 2>&1
+
+IF EXIST "temp\PSP_GAME\SYSDIR\EBOOT.BIN" (
+    GOTO FILE08
+) ELSE (
+    @ECHO EBOOT.BIN Not Found.
+    @ECHO Something went wrong, try restarting the patch.
+    @ECHO If the problem repeates, send debug-%datestamp%-%timestamp%.7z to the patch creators.
+    GOTO EXITL
+)
+
+:FILE08
+move /y "%imhere%temp\PSP_GAME\SYSDIR\EBOOT.BIN" "%imhere%EBOOT.BIN" >> debug.log 2>&1
+echo 046 >> debug.log 2>&1
+
+del /f /q EBOOT.BIN.dec >> debug.log 2>&1
+echo 046.1 (cleanup) >> debug.log 2>&1
+
+IF EXIST "EBOOT.BIN" (
+    GOTO FILE09
+) ELSE (
+    @ECHO EBOOT.BIN Not Found.
+    @ECHO Something went wrong, try restarting the patch.
+    @ECHO If the problem repeates, send debug-%datestamp%-%timestamp%.7z to the patch creators.
+    GOTO EXITL
+)
+
+:FILE09
+rd /s /q "temp" >> debug.log 2>&1
+echo 046.5 >> debug.log 2>&1
+
+rd /s /q "PSP_GAME" >> debug.log 2>&1
+echo 046.5 >> debug.log 2>&1
+
+deceboot.exe EBOOT.BIN EBOOT.BIN.dec >> debug.log 2>&1
+echo 047 >> debug.log 2>&1
+
+CertUtil -hashfile "EBOOT.BIN.dec" MD5 >> debug.log 2>&1
+echo 048 >> debug.log 2>&1
+
+del /f /q EBOOT.BIN >> debug.log 2>&1
+echo 049.1 (cleanup) >> debug.log 2>&1
+
+IF EXIST "EBOOT.BIN.dec" (
+    GOTO FILE10
+) ELSE (
+    @ECHO EBOOT.BIN.dec Not Found.
+    @ECHO Something went wrong, try restarting the patch.
+    @ECHO If the problem repeates, send debug-%datestamp%-%timestamp%.7z to the patch creators.
+    GOTO EXITL
+)
+
+:FILE10
+xdelta.exe -d -vfs "EBOOT.BIN.dec" "xdelta-e.xdelta" "EBOOT.BIN" >> debug.log 2>&1
+echo 050 >> debug.log 2>&1
+
+CertUtil -hashfile "EBOOT.BIN" MD5 >> debug.log 2>&1
+echo 051 >> debug.log 2>&1
+
+del /f /q EBOOT.BIN.dec >> debug.log 2>&1
+echo 052 >> debug.log 2>&1
+
+echo /*** PASSAGE 8 END ***/ >> debug.log 2>&1
+echo 053 >> debug.log 2>&1
+
+echo Passage 9/9...
+
+echo /*** PASSAGE 9 START ***/ >> debug.log 2>&1
+echo 054 >> debug.log 2>&1
+
+echo. & echo Your SAO.iso (Japanese) is going to get patched soon.
 echo If you haven't already made a backup, do you want to make a backup copy now?
-
-for /f "tokens=2 delims==" %%a in ('wmic OS Get localdatetime /value') do set "dt=%%a"
-set "YY=%dt:~2,2%" & set "YYYY=%dt:~0,4%" & set "MM=%dt:~4,2%" & set "DD=%dt:~6,2%"
-set "HH=%dt:~8,2%" & set "Min=%dt:~10,2%" & set "Sec=%dt:~12,2%"
-set "datestamp=%YYYY%%MM%%DD%" & set "timestamp=%HH%%Min%%Sec%"
+echo Keeping a copy of the ISO is always recommended before any patch.
 
 CHOICE /C YN /M "Press key"
 IF ERRORLEVEL 2 (
-    GOTO FINAL
+    GOTO AUTOMAN
 ) ELSE (
     @ECHO 044-A1 >> debug.log 2>&1
     ROBOCOPY "%imhere% " "%imhere%Backup " SAO.iso >> debug.log 2>&1
@@ -410,7 +557,7 @@ IF EXIST "Backup\SAO.iso" (
 :ZCHECK
 FOR %%I IN (Backup\SAO.iso) DO SET BackupSize1=%%~zI
 IF %FileSize1% EQU %BackupSize1% (
-    GOTO:FINAL
+    GOTO AUTOMAN
 ) ELSE (
     @ECHO /*** ERROR START ***/ >> debug.log 2>&1
     @ECHO 044-B1 >> debug.log 2>&1
@@ -428,10 +575,104 @@ IF %FileSize1% EQU %BackupSize1% (
     GOTO EXIT
 )
 
-:FINAL
-echo Compressing log file...
-7-zip.exe a -m0=lzma2 -mx debug-%datestamp%-%timestamp%.7z debug.log
+:AUTOMAN
+echo.
+echo It's time for the final touch. Do you choose the Auto-patch or Manual patch? (Manual recommended, read Memo.txt to know why)
 
-echo - To Be Continued... (see Memo.txt)
+CHOICE /C AM /M "Press key"
+IF ERRORLEVEL 2 (
+    echo Compressing log file...
+    7-zip.exe a -m0=lzma2 -mx debug-%datestamp%-%timestamp%.7z debug.log
+    echo.
+    echo End. See the Memo.txt file for Manual procedure.
+    start Memo.txt
+    GOTO EXIT
+) ELSE (
+    GOTO FINAL
+)
+
+:FINAL
+IF EXIST "EBOOT.BIN" (
+    GOTO FILE11
+) ELSE (
+    @ECHO EBOOT.BIN Not Found.
+    @ECHO Something went wrong, try restarting the patch.
+    @ECHO If the problem repeates, send debug-%datestamp%-%timestamp%.7z to the patch creators.
+    GOTO EXITL
+)
+
+:FILE11
+IF EXIST "INSTALL.DAT" (
+    GOTO FILE12
+) ELSE (
+    @ECHO INSTALL.DAT Not Found.
+    @ECHO Something went wrong, try restarting the patch.
+    @ECHO If the problem repeates, send debug-%datestamp%-%timestamp%.7z to the patch creators.
+    GOTO EXITL
+)
+
+:FILE12
+echo.
+echo Applying final patch...
+
+rd /s /q "PSP_GAME" >> debug.log 2>&1
+echo 054.4 (cleanup) >> debug.log 2>&1
+
+mkdir "%imhere%PSP_GAME" >> debug.log 2>&1
+echo 054.5 >> debug.log 2>&1
+mkdir "%imhere%PSP_GAME\SYSDIR" >> debug.log 2>&1
+echo 054.6 >> debug.log 2>&1
+mkdir "%imhere%PSP_GAME\INSDIR" >> debug.log 2>&1
+echo 054.7 >> debug.log 2>&1
+
+move /y "EBOOT.BIN" "PSP_GAME\SYSDIR\" >> debug.log 2>&1
+echo 054.8 >> debug.log 2>&1
+move /y "INSTALL.DAT" "PSP_GAME\INSDIR\" >> debug.log 2>&1
+echo 054.9 >> debug.log 2>&1
+
+IF EXIST "PSP_GAME\SYSDIR\EBOOT.BIN" (
+    GOTO FILE13
+) ELSE (
+    @ECHO EBOOT.BIN Not Found.
+    @ECHO Something went wrong, try restarting the patch.
+    @ECHO If the problem repeates, send debug-%datestamp%-%timestamp%.7z to the patch creators.
+    GOTO EXITL
+)
+
+:FILE13
+IF EXIST "PSP_GAME\INSDIR\INSTALL.DAT" (
+    GOTO SWQSG
+) ELSE (
+    @ECHO INSTALL.DAT Not Found.
+    @ECHO Something went wrong, try restarting the patch.
+    @ECHO If the problem repeates, send debug-%datestamp%-%timestamp%.7z to the patch creators.
+    GOTO EXITL
+)
+
+:SWQSG
+WQSG_UMD.exe --iso=SAO.iso --file=.\PSP_GAME --log
+echo 055 >> debug.log 2>&1
+
+CertUtil -hashfile "Backup\SAO.iso" MD5 >> debug.log 2>&1
+echo 056 >> debug.log 2>&1
+
+rd /s /q "PSP_GAME" >> debug.log 2>&1
+echo 057 >> debug.log 2>&1
+
+echo.
+echo SAO.iso has been patched completely.
+echo.
+
+echo Compressing log file...
+7-zip.exe a -m0=lzma2 -mx debug-%datestamp%-%timestamp%.7z debug.log >nul
+echo Created archive debug-%datestamp%-%timestamp%.7z
+
+echo.
+echo End. SAO.iso is now ready to be used on PSP (and emulator but read the notes in Memo.txt first).
+GOTO EXIT
+
+:EXITL
+7-zip.exe a -m0=lzma2 -mx debug-%datestamp%-%timestamp%.7z debug.log >nul
+start Memo.txt
 :EXIT
 PAUSE
