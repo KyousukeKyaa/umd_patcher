@@ -421,7 +421,7 @@ IF EXIST "temp\install-en" (
 )
 
 :FILE06
-cpkmakec.exe "temp\install-en" INSTALL.cpk -mode=FULL -code=UTF-8 -view >> debug.log 2>&1
+cpkmakec.exe "temp\install-en" INSTALL.cpk -align=2048 -mode=FILENAME -code=UTF-8 -view >> debug.log 2>&1
 echo 040 >> debug.log 2>&1
 
 IF EXIST "INSTALL.cpk" (
