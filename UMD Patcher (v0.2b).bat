@@ -175,7 +175,7 @@ echo 001.0 >> debug.log 2>&1
 rd /s /q "%imhere%temp\PSP_GAME" >> debug.log 2>&1
 echo 001.1 (cleanup) >> debug.log 2>&1
 
-7-zip.exe x SAO.iso PSP_GAME/INSDIR/INSTALL.DAT -otemp >> debug.log 2>&1
+7z.exe x SAO.iso PSP_GAME/INSDIR/INSTALL.DAT -otemp >> debug.log 2>&1
 echo 002 >> debug.log 2>&1
 
 del /f /q INSTALL.DAT >> debug.log 2>&1
@@ -331,7 +331,7 @@ echo 023 >> debug.log 2>&1
 CertUtil -hashfile "install-jp.tar" MD5 >> debug.log 2>&1
 echo 024 >> debug.log 2>&1
 
-7-zip.exe t "install-jp.tar" >> debug.log 2>&1
+7z.exe t "install-jp.tar" >> debug.log 2>&1
 echo 025 >> debug.log 2>&1
 
 rd /s /q install-jp >> debug.log 2>&1
@@ -364,7 +364,7 @@ echo 029 >> debug.log 2>&1
 CertUtil -hashfile "install-en.tar" MD5 >> debug.log 2>&1
 echo 030 >> debug.log 2>&1
 
-7-zip.exe t "install-en.tar" >> debug.log 2>&1
+7z.exe t "install-en.tar" >> debug.log 2>&1
 echo 031 >> debug.log 2>&1
 
 del /f /q install-jp.tar >> debug.log 2>&1
@@ -391,7 +391,7 @@ IF EXIST "install-en.tar" (
 )
 
 :FILE05
-7-zip.exe x install-en.tar -otemp >> debug.log 2>&1
+7z.exe x install-en.tar -otemp >> debug.log 2>&1
 echo 035 >> debug.log 2>&1
 
 du.exe -nobanner -q -v "temp\install-en" >> debug.log 2>&1
@@ -450,7 +450,7 @@ echo Passage 8/9...
 
 echo /*** PASSAGE 8 START ***/ >> debug.log 2>&1
 
-7-zip.exe x SAO.iso PSP_GAME/SYSDIR/EBOOT.BIN -otemp >> debug.log 2>&1
+7z.exe x SAO.iso PSP_GAME/SYSDIR/EBOOT.BIN -otemp >> debug.log 2>&1
 echo 045 >> debug.log 2>&1
 
 del /f /q EBOOT.BIN >> debug.log 2>&1
@@ -537,7 +537,7 @@ IF ERRORLEVEL 2 (
     @ECHO 044-A2 >> debug.log 2>&1
     CertUtil -hashfile "Backup\SAO.iso" MD5 >> debug.log 2>&1
     @ECHO 044-A3 >> debug.log 2>&1
-    7-zip.exe t "Backup\SAO.iso" >> debug.log 2>&1
+    7z.exe t "Backup\SAO.iso" >> debug.log 2>&1
     @ECHO 044-A4 >> debug.log 2>&1
     @ECHO Backup Done.
     GOTO CHECKF
@@ -547,7 +547,7 @@ IF ERRORLEVEL 2 (
 IF EXIST "Backup\SAO.iso" (
     GOTO ZCHECK
 ) ELSE (
-    7-zip.exe a -m0=lzma2 -mx debug-%datestamp%-%timestamp%.7z debug.log >nul
+    7z.exe a -m0=lzma2 -mx debug-%datestamp%-%timestamp%.7z debug.log >nul
     @ECHO ERROR: cannot find backup file, something went wrong. All actions will be stopped.
     @ECHO Please send debug-%datestamp%-%timestamp%.7z file to the patch authors.
     PAUSE
@@ -563,12 +563,12 @@ IF %FileSize1% EQU %BackupSize1% (
     @ECHO 044-B1 >> debug.log 2>&1
     CertUtil -hashfile "Backup\SAO.iso" MD5 >> debug.log 2>&1
     @ECHO 044-B2 >> debug.log 2>&1
-    7-zip.exe t "Backup\SAO.iso" >> debug.log 2>&1
+    7z.exe t "Backup\SAO.iso" >> debug.log 2>&1
     @ECHO 044-B3 >> debug.log 2>&1
     @ECHO Unexpected Backup Size: %BackupSize1% >> debug.log 2>&1
     @ECHO 044-B4 >> debug.log 2>&1
     @ECHO /*** ERROR END ***/ >> debug.log 2>&1
-    7-zip.exe a -m0=lzma2 -mx debug-%datestamp%-%timestamp%.7z debug.log >nul
+    7z.exe a -m0=lzma2 -mx debug-%datestamp%-%timestamp%.7z debug.log >nul
     @ECHO ERROR: the backup wasn't generated correctly. All actions will be stopped.
     @ECHO Please send debug-%datestamp%-%timestamp%.7z file to the patch authors.
     PAUSE
@@ -582,7 +582,7 @@ echo It's time for the final touch. Do you choose the Auto-patch or Manual patch
 CHOICE /C AM /M "Press key"
 IF ERRORLEVEL 2 (
     echo Compressing log file...
-    7-zip.exe a -m0=lzma2 -mx debug-%datestamp%-%timestamp%.7z debug.log
+    7z.exe a -m0=lzma2 -mx debug-%datestamp%-%timestamp%.7z debug.log
     echo.
     echo End. See the Memo.txt file for Manual procedure.
     start Memo.txt
@@ -675,7 +675,7 @@ echo SAO.iso has been patched completely.
 echo.
 
 echo Compressing log file...
-7-zip.exe a -m0=lzma2 -mx debug-%datestamp%-%timestamp%.7z debug.log >nul
+7z.exe a -m0=lzma2 -mx debug-%datestamp%-%timestamp%.7z debug.log >nul
 echo Created archive debug-%datestamp%-%timestamp%.7z
 
 echo.
@@ -683,7 +683,7 @@ echo End. SAO.iso is now ready to be used on PSP (and emulator but read the note
 GOTO EXIT
 
 :EXITL
-7-zip.exe a -m0=lzma2 -mx debug-%datestamp%-%timestamp%.7z debug.log >nul
+7z.exe a -m0=lzma2 -mx debug-%datestamp%-%timestamp%.7z debug.log >nul
 start Memo.txt
 :EXIT
 PAUSE
