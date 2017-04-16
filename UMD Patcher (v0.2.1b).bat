@@ -2,7 +2,7 @@
 echo /*****************************************************************************************/ > debug.log 2>&1
 echo /*****************************************************************************************/ >> debug.log 2>&1
 echo /***                                                                                   ***/ >> debug.log 2>&1
-echo /***  UMD Patcher (v0.2b) is a CLI-based program for patching ISO-formatted UMD rips.  ***/ >> debug.log 2>&1
+echo /***  UMD Patcher (v0.2.1b) is a CLI-based program for patching ISO-formatted UMD rips.  ***/ >> debug.log 2>&1
 echo /***  Copyright (C) 2017 Michael Colombo.                                              ***/ >> debug.log 2>&1
 echo /***                                                                                   ***/ >> debug.log 2>&1
 echo /***  This program is free software: you can redistribute it and/or modify             ***/ >> debug.log 2>&1
@@ -24,7 +24,7 @@ echo. >> debug.log 2>&1
 
 echo /****************************************************************************/
 echo.
-echo UMD Patcher (v0.2b) Copyright (C) 2017 Michael Colombo
+echo UMD Patcher (v0.2.1b) Copyright (C) 2017 Michael Colombo
 echo.
 echo This program comes with ABSOLUTELY NO WARRANTY; for details press 'D' key.
 echo This is free software, and you are welcome to redistribute it
@@ -577,7 +577,7 @@ IF %FileSize1% EQU %BackupSize1% (
 
 :AUTOMAN
 echo.
-echo It's time for the final touch. Do you choose the Auto-patch or Manual patch? (Manual recommended, read Memo.txt to know why)
+echo It's time for the final touch. Do you choose the Auto-patch or Manual patch?
 
 CHOICE /C AM /M "Press key"
 IF ERRORLEVEL 2 (
