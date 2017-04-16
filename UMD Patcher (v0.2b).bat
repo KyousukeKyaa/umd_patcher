@@ -184,9 +184,9 @@ echo 002.1 (cleanup) >> debug.log 2>&1
 IF EXIST "temp\PSP_GAME\INSDIR\INSTALL.DAT" (
     GOTO FILE01
 ) ELSE (
-    @ECHO INSTALL.DAT Not Found.
+    @ECHO temp\PSP_GAME\INSDIR\INSTALL.DAT Not Found.
     @ECHO Something went wrong, try restarting the patch.
-    @ECHO If the problem repeates, send debug-%datestamp%-%timestamp%.7z to the patch creators.
+    @ECHO If the problem repeats, send debug-%datestamp%-%timestamp%.7z to the patch creators.
     GOTO EXITL
 )
 
@@ -279,9 +279,9 @@ echo 017 >> debug.log 2>&1
 IF EXIST "temp\install-jp" (
     GOTO FILE02
 ) ELSE (
-    @ECHO install-jp Not Found.
+    @ECHO temp\install-jp Not Found.
     @ECHO Something went wrong, try restarting the patch.
-    @ECHO If the problem repeates, send debug-%datestamp%-%timestamp%.7z to the patch creators.
+    @ECHO If the problem repeats, send debug-%datestamp%-%timestamp%.7z to the patch creators.
     GOTO EXITL
 )
 
@@ -314,7 +314,7 @@ IF EXIST "install-jp" (
 ) ELSE (
     @ECHO install-jp Not Found.
     @ECHO Something went wrong, try restarting the patch.
-    @ECHO If the problem repeates, send debug-%datestamp%-%timestamp%.7z to the patch creators.
+    @ECHO If the problem repeats, send debug-%datestamp%-%timestamp%.7z to the patch creators.
     GOTO EXITL
 )
 
@@ -353,7 +353,7 @@ IF EXIST "install-jp.tar" (
 ) ELSE (
     @ECHO install-jp.tar Not Found.
     @ECHO Something went wrong, try restarting the patch.
-    @ECHO If the problem repeates, send debug-%datestamp%-%timestamp%.7z to the patch creators.
+    @ECHO If the problem repeats, send debug-%datestamp%-%timestamp%.7z to the patch creators.
     GOTO EXITL
 )
 
@@ -386,7 +386,7 @@ IF EXIST "install-en.tar" (
 ) ELSE (
     @ECHO install-en.tar Not Found.
     @ECHO Something went wrong, try restarting the patch.
-    @ECHO If the problem repeates, send debug-%datestamp%-%timestamp%.7z to the patch creators.
+    @ECHO If the problem repeats, send debug-%datestamp%-%timestamp%.7z to the patch creators.
     GOTO EXITL
 )
 
@@ -414,9 +414,9 @@ echo 039.1 (cleanup) >> debug.log 2>&1
 IF EXIST "temp\install-en" (
     GOTO FILE06
 ) ELSE (
-    @ECHO install-en Not Found.
+    @ECHO temp\install-en Not Found.
     @ECHO Something went wrong, try restarting the patch.
-    @ECHO If the problem repeates, send debug-%datestamp%-%timestamp%.7z to the patch creators.
+    @ECHO If the problem repeats, send debug-%datestamp%-%timestamp%.7z to the patch creators.
     GOTO EXITL
 )
 
@@ -429,7 +429,7 @@ IF EXIST "INSTALL.cpk" (
 ) ELSE (
     @ECHO INSTALL.cpk Not Found.
     @ECHO Something went wrong, try restarting the patch.
-    @ECHO If the problem repeates, send debug-%datestamp%-%timestamp%.7z to the patch creators.
+    @ECHO If the problem repeats, send debug-%datestamp%-%timestamp%.7z to the patch creators.
     GOTO EXITL
 )
 
@@ -459,9 +459,9 @@ echo 045.1 (cleanup) >> debug.log 2>&1
 IF EXIST "temp\PSP_GAME\SYSDIR\EBOOT.BIN" (
     GOTO FILE08
 ) ELSE (
-    @ECHO EBOOT.BIN Not Found.
+    @ECHO temp\PSP_GAME\SYSDIR\EBOOT.BIN Not Found.
     @ECHO Something went wrong, try restarting the patch.
-    @ECHO If the problem repeates, send debug-%datestamp%-%timestamp%.7z to the patch creators.
+    @ECHO If the problem repeats, send debug-%datestamp%-%timestamp%.7z to the patch creators.
     GOTO EXITL
 )
 
@@ -477,7 +477,7 @@ IF EXIST "EBOOT.BIN" (
 ) ELSE (
     @ECHO EBOOT.BIN Not Found.
     @ECHO Something went wrong, try restarting the patch.
-    @ECHO If the problem repeates, send debug-%datestamp%-%timestamp%.7z to the patch creators.
+    @ECHO If the problem repeats, send debug-%datestamp%-%timestamp%.7z to the patch creators.
     GOTO EXITL
 )
 
@@ -502,7 +502,7 @@ IF EXIST "EBOOT.BIN.dec" (
 ) ELSE (
     @ECHO EBOOT.BIN.dec Not Found.
     @ECHO Something went wrong, try restarting the patch.
-    @ECHO If the problem repeates, send debug-%datestamp%-%timestamp%.7z to the patch creators.
+    @ECHO If the problem repeats, send debug-%datestamp%-%timestamp%.7z to the patch creators.
     GOTO EXITL
 )
 
@@ -592,12 +592,23 @@ IF ERRORLEVEL 2 (
 )
 
 :FINAL
+FOR /F "TOKENS=4-7 DELIMS=[.] " %%i IN ('ver') DO (IF %%i==Version (SET v=%%j%%k) ELSE (SET v=%%i%%j))
+IF %v% GTR 63 (
+    @ECHO.
+    @ECHO Windows 10 Detected. At this moment, the auto-patch isn't supported in Windows 10.
+    @ECHO Please use the Manual procedure ^(see Memo.txt^)
+    GOTO EXITL
+) ELSE (
+    GOTO AUTOP
+)
+
+:AUTOP
 IF EXIST "EBOOT.BIN" (
     GOTO FILE11
 ) ELSE (
     @ECHO EBOOT.BIN Not Found.
     @ECHO Something went wrong, try restarting the patch.
-    @ECHO If the problem repeates, send debug-%datestamp%-%timestamp%.7z to the patch creators.
+    @ECHO If the problem repeats, send debug-%datestamp%-%timestamp%.7z to the patch creators.
     GOTO EXITL
 )
 
@@ -607,7 +618,7 @@ IF EXIST "INSTALL.DAT" (
 ) ELSE (
     @ECHO INSTALL.DAT Not Found.
     @ECHO Something went wrong, try restarting the patch.
-    @ECHO If the problem repeates, send debug-%datestamp%-%timestamp%.7z to the patch creators.
+    @ECHO If the problem repeats, send debug-%datestamp%-%timestamp%.7z to the patch creators.
     GOTO EXITL
 )
 
@@ -633,9 +644,9 @@ echo 054.9 >> debug.log 2>&1
 IF EXIST "PSP_GAME\SYSDIR\EBOOT.BIN" (
     GOTO FILE13
 ) ELSE (
-    @ECHO EBOOT.BIN Not Found.
+    @ECHO PSP_GAME\SYSDIR\EBOOT.BIN Not Found.
     @ECHO Something went wrong, try restarting the patch.
-    @ECHO If the problem repeates, send debug-%datestamp%-%timestamp%.7z to the patch creators.
+    @ECHO If the problem repeats, send debug-%datestamp%-%timestamp%.7z to the patch creators.
     GOTO EXITL
 )
 
@@ -643,9 +654,9 @@ IF EXIST "PSP_GAME\SYSDIR\EBOOT.BIN" (
 IF EXIST "PSP_GAME\INSDIR\INSTALL.DAT" (
     GOTO SWQSG
 ) ELSE (
-    @ECHO INSTALL.DAT Not Found.
+    @ECHO PSP_GAME\INSDIR\INSTALL.DAT Not Found.
     @ECHO Something went wrong, try restarting the patch.
-    @ECHO If the problem repeates, send debug-%datestamp%-%timestamp%.7z to the patch creators.
+    @ECHO If the problem repeats, send debug-%datestamp%-%timestamp%.7z to the patch creators.
     GOTO EXITL
 )
 
