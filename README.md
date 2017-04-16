@@ -7,7 +7,7 @@ This program is released under GPLv3 license, check the [LICENSE](https://github
 UMD Patcher (v0.2b) is a CLI-based program made to patch ISO-formatted UMD rips.
 The idea started when I tried to create a patch for SAO Infinity Moment to convert the game files to the fan-translated version *(by exorcizamus)* and around the same time I found an active [translation project](https://gbatemp.net/threads/sword-art-online-infinity-moment-psp.342727/) so I decided to contribute. The CLI program is hardcoded with all values needed to patch this game, you only need the dependencies, which I've uploaded here for now:
 
-### -> **[Download](https://www.sendspace.com/file/k4w8rk)**
+### -> **[Download](https://www.sendspace.com/file/n90w6s)**
 
 What it does:
 - [x] extract "INSTALL.DAT" from "SAO.iso" with "7-zip.exe"
@@ -89,9 +89,9 @@ I recommend to not use your old save states, because they can crash the game (it
 
 *pgdecrypt.exe* [(no ver)](https://gbatemp.net/threads/pgd-encrypter.432029/) - MD5: 27897c5e451bd384770fd713eb070b73
 
-*7-zip.exe* [(v9.22)](https://sourceforge.net/projects/sevenzip/files/7-Zip/9.22/) - MD5: a1efcedc97c76b356f7ffa7cf909d733
+*7z.exe* [(v16.04)](https://sourceforge.net/projects/sevenzip/files/7-Zip/16.04/) - MD5: e7957b74befe1b2451c460b111c8e86f
 
-*cpkmakec.exe* [(v1.36.00)](https://duckduckgo.com/html/?q=cpkmakec.exe%201.36.00) - MD5: b06a7eb5fee15170da156c162bc805ae
+*cpkmakec.exe* [(v2.49.32)](https://duckduckgo.com/html/?q=cpkmakec.exe%202.49.32) - MD5: 53aeba09c547093a5e970bc6e772d424
 
 *UMDGen.exe* [(v4.00)](http://www.romhacking.net/utilities/1218/) - MD5: 6d86553f6bd7cf0940695bd2891baad1
 
