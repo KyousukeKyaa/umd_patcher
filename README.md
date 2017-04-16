@@ -7,7 +7,7 @@ This program is released under GPLv3 license, check the [LICENSE](https://github
 UMD Patcher (v0.2b) is a CLI-based program made to patch ISO-formatted UMD rips.
 The idea started when I tried to create a patch for SAO Infinity Moment to convert the game files to the fan-translated version *(by exorcizamus)* and around the same time I found an active [translation project](https://gbatemp.net/threads/sword-art-online-infinity-moment-psp.342727/) so I decided to contribute. The CLI program is hardcoded with all values needed to patch this game, you only need the dependencies, which I've uploaded here for now:
 
-### -> **[Download](https://www.sendspace.com/file/iia4z7)**
+### -> **[Download](https://www.sendspace.com/file/k4w8rk)**
 
 What it does:
 - [x] extract "INSTALL.DAT" from "SAO.iso" with "7-zip.exe"
@@ -67,14 +67,13 @@ Before using the new patched ISO, there are a few things you should do to in ord
 I recommend to not use your old save states, because they can crash the game (it happened to me). The pre-patch save states will still be in Japanese, at least all the game content of the areas you have explored will still be in Japanese because that's how PPSSPP cached them. Your future save states will obviously be all in English (as far as the patch goes with the translation), if you resumed playing as I explained above and if you didn't load from pre-patch save state.
 
 # **TODO**
-**Tools** - This repository has no 3rd party tools attached but it still requires dependencies to run, some are open source and free and others are freeware, these need to be replaced with a working alternative, for example UMDGen.exe is a discontinued project, but I haven't found any alternatives. If you know any tool that could be used, you can open an [issue](https://github.com/KyousukeKyaa/umd_patcher/issues) or contact me on the gbatemp forum here: [my account](https://gbatemp.net/members/nasiin.419446/).
-Other than that, all is left is to find the necessary license file of the respective tools and add them to future archives.
+**Tools** - This repository has no 3rd party tools attached but it still requires dependencies to run, some are open source and free and others are freeware, these need to be replaced with a working alternative, for example UMDGen.exe is a discontinued project, but I haven't found any alternatives besides WQSG_UMD.exe which is buggy and unstable. If you know any tool that could be used, you can open an [issue](https://github.com/KyousukeKyaa/umd_patcher/issues) or contact me on the gbatemp forum here: [my account](https://gbatemp.net/members/nasiin.419446/). If you're skilled in C++ programming and want to contribute, check the WQSG_UMD_kkMod repository.
 
 **Patcher** - The patcher is a CLI program, there's no GUI for now, it doesn't really need one but I plan to make something like an old-school loader in the future, midi song included.
 
 **For Translators** - I'm working on a separate program to make it easier for translators to generate xdelta patches that will be used with UMD Patcher in the future. I plan to merge this other program together with UMD Patcher when everything is ready.
 
-**Beta Testing** - The program needs thorough testing on different versions of Windows, I've tested on Windows 7 64-bit and can confirm it works at least on this.
+**Beta Testing** - The program needs thorough testing on different versions of Windows, I've tested on Windows 7 64-bit and can confirm it works at least on this. The current version of WQSG_UMD.exe is confirmed to be causing issues with Windows 10.
 
 **GNU/Linux Ports** - Most of the dependencies already have versions that run on GNU/Linux, tools like UMDGen can be used with Wine too. Mainly only the batch file needs to be ported. At this moment I've no GNU/Linux installations, any contribution would help a lot.
 
@@ -102,4 +101,4 @@ Other than that, all is left is to find the necessary license file of the respec
 
 *.xdelta patch file* (you can [make it](https://gbatemp.net/threads/sword-art-online-infinity-moment-psp.342727/page-86#post-7232590) on your own if you're a translator, or use the test patch already included at the download link in the beginning of this article).
 
-**Note** - Some of the programs listed above have newer versions but I haven't tested them. These versions are confirmed working (except WQSG_UMD.exe which is buggy and doesn't run well on Win10).
+**Note** - Some of the programs listed above have newer versions but I haven't tested them. These versions are confirmed working, except WQSG_UMD.exe which is buggy and doesn't run well on Windows 10.
