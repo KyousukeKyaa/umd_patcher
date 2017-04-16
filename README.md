@@ -1,13 +1,13 @@
-# UMD Patcher (v0.2b)
+# UMD Patcher (v0.2.1b)
 
 This program is released under GPLv3 license, check the [LICENSE](https://github.com/KyousukeKyaa/umd_patcher/blob/master/LICENSE) file for details.
 
 ![screenshot.png](https://i.imgur.com/2EUwnDf.png)
 
-UMD Patcher (v0.2b) is a CLI-based program made to patch ISO-formatted UMD rips.
+UMD Patcher (v0.2.1b) is a CLI-based program made to patch ISO-formatted UMD rips.
 The idea started when I tried to create a patch for SAO Infinity Moment to convert the game files to the fan-translated version *(by exorcizamus)* and around the same time I found an active [translation project](https://gbatemp.net/threads/sword-art-online-infinity-moment-psp.342727/) so I decided to contribute. The CLI program is hardcoded with all values needed to patch this game, you only need the dependencies, which I've uploaded here for now:
 
-### -> **[Download](https://www.sendspace.com/file/4xz7x0)**
+### -> **[Download](https://www.sendspace.com/file/7q7nl5)**
 
 What it does:
 - [x] extract "INSTALL.DAT" from "SAO.iso" with "7-zip.exe"
@@ -24,7 +24,7 @@ What it does:
 - [x] decrypt "EBOOT.BIN" and create "EBOOT.BIN.dec" with "deceboot.exe"
 - [x] patch "EBOOT.BIN.dec" to psp-compatible "EBOOT.BIN" using "xdelta.exe"
 - [x] make backup of "SAO.iso" to "Backup" folder
-- [x] autoreplace "INSTALL.DAT" and "EBOOT.BIN" in "SAO.iso" using "WQSG_UMD.exe" or give the choice replace the files manually with "UMDGen.exe" (recommended)
+- [x] autoreplace "INSTALL.DAT" and "EBOOT.BIN" in "SAO.iso" using "WQSG_UMD.exe" or give the choice replace the files manually with "UMDGen.exe"
 
 How to manually replace the files with UMDGen:
 First run the patch and select Manual, then when everything is completed open your Japanese ISO in UMDGen.exe and go to:
@@ -46,12 +46,7 @@ Drag and drop EBOOT.BIN here (click Yes again when asked to replace). After that
 --------->Uncompressed (*iso)
 ```
 
-Select the destination folder and click Save, wait for UMDGen to finish the process. That's all, the ISO is ready to be used.
-
-**Q**: Why is the manual replacement recommended?
-**A**: because the autoreplace with "WQSG_UMD.exe" causes the ISO to expand in size, thus the final result is a 2GB and more ISO file. If you don't care about occupied space, then you can use the autoreplace if you want.
-
-Either ways, congrats! You now have an English (BETA) version of SAO Infinity Moment. Stay tuned because there will be updates later.
+Select the destination folder and click Save, wait for UMDGen to finish the process. That's all, congrats! You now have an English (BETA) version of SAO Infinity Moment. Stay tuned because there will be updates later.
 
 **Notes for PPSSPP users:**
 Before using the new patched ISO, there are a few things you should do to in order to be able to continue playing from where you left in the Japanese version without losing any progress.
